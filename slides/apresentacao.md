@@ -22,7 +22,7 @@ Decks detalhados por modelo: slides/lambda-ski.md e slides/mtnd-compostos.md.
 
 **Modelos:** λ-Cálculo → Combinadores SKI · MT Não Determinística
 
-Turma `<preencher: CC5MA / CC5NA>` — Prof. Daniel Leal Souza — 01/2026
+Turma CC5NA — Prof. Daniel Leal Souza — 01/2026
 
 Carlos Eduardo Cardoso Silva · Gabriel Costa de Miranda · João Ricardo Silva de Almeida
 

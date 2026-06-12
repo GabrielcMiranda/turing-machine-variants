@@ -3,7 +3,7 @@
 **Disciplina:** Teoria da Computabilidade
 **Professor:** Daniel Leal Souza
 **Semestre:** 01/2026
-**Turma:** `<preencher: CC5MA ou CC5NA>`
+**Turma:** CC5NA
 **Tema:** Máquinas Universais, Turing e λ-Cálculo
 
 **Integrantes:**
