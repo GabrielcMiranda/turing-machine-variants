@@ -13,6 +13,7 @@
 | Carlos Eduardo Cardoso Silva | Máquina de Turing Não Determinística (JFLAP) |
 | Gabriel Costa de Miranda | Combinadores SKI (Python) |
 | João Ricardo Silva de Almeida | Integração, documentação e defesa |
+| Yago Patrick Schnorr Pinto | Testes, rastreamento, QA e revisão cruzada |
 
 > A arguição é **individual**: todos os integrantes sabem explicar as **duas** implementações.
 

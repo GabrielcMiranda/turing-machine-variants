@@ -19,3 +19,14 @@ Os pedidos à ferramenta incluíram: explicar o projeto, reorganizar as pastas, 
 que falhava, escolher um exemplo de redução com pelo menos 7 passos e auxiliar na redação dos
 arquivos de documentação. Foram aproveitados os trechos de código corrigidos, os textos de
 README/referências e os exemplos sugeridos.
+
+## O que foi modificado ou rejeitado pela equipe
+A equipe revisou todas as sugestões, executou e validou os testes e ajustou textos e exemplos
+quando necessário. Nenhuma saída da IA foi incorporada sem verificação e compreensão.
+
+## Declaração de revisão
+Declaramos que **todos os integrantes revisaram e compreendem** os trechos incorporados, sendo
+capazes de explicá-los na arguição individual.
+
+**Integrantes:** Carlos Eduardo Cardoso Silva, Gabriel Costa de Miranda, João Ricardo Silva de
+Almeida, Yago Patrick Schnorr Pinto.

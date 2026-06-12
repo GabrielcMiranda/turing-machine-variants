@@ -4,6 +4,10 @@ Cobre a abertura teórica e a análise transversal do deck integrado (`apresenta
 preparar a equipe para perguntas que **cruzam os dois modelos**. A arguição é individual: este
 roteiro é o "fio condutor" que liga SKI e MTND.
 
+> Divisão de fala: **João Ricardo** apresenta a abertura teórica (Church-Turing) e o
+> encerramento; **Yago** apresenta a seção de análise transversal (determinismo × não
+> determinismo, λ ↔ combinadores). Ambos usam este roteiro como base.
+
 ## Fala por seção do deck integrado
 
 **Capa + Agenda (40 s)**

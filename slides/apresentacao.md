@@ -10,9 +10,10 @@ Renderizar com Marp (VS Code: "Marp for VS Code" -> Export PPTX/PDF) ou importar
 
 Cronometragem alvo (lauda: 12-15 min): ~3' teoria + ~6' demonstração + ~3' análise + arguição.
 Divisão de fala sugerida:
-  - João Ricardo: abertura teórica + análise transversal + fechamento
+  - João Ricardo: abertura teórica (Church-Turing) + encerramento
   - Gabriel: bloco do SKI + demo do SKI
   - Carlos Eduardo: bloco da MTND + demo da MTND
+  - Yago: análise transversal (det × não-det, λ ↔ combinadores)
 Decks detalhados por modelo: slides/lambda-ski.md e slides/mtnd-compostos.md.
 -->
 
@@ -24,7 +25,7 @@ Decks detalhados por modelo: slides/lambda-ski.md e slides/mtnd-compostos.md.
 
 Turma CC5NA — Prof. Daniel Leal Souza — 01/2026
 
-Carlos Eduardo Cardoso Silva · Gabriel Costa de Miranda · João Ricardo Silva de Almeida
+Carlos Eduardo Cardoso Silva · Gabriel Costa de Miranda · João Ricardo Silva de Almeida · Yago Patrick Schnorr Pinto
 
 ---
 
