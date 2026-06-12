@@ -55,22 +55,36 @@ O redutor implementado em `ski.py` adota estritamente a estratégia de **Ordem N
 
 ## 4. Rastreamento e Traço de Execução ($\ge 7$ passos)
 
-Para atender à exigência prática da lauda de possuir um caso de teste contendo um traço detalhado com pelo menos 7 passos de redução, o sistema analisa a expansão do termo combinatório complexo:
-`S S K (S K K) x y z`
+Para atender à exigência da lauda (Seção 7) de um traço com pelo menos 7 passos de
+redução, usamos o **numeral de Church 2** codificado puramente em combinadores:
 
-Este termo força o interpretador a realizar substituições aninhadas de subárvores antes de atingir a forma normal. O comportamento do fluxo de reescrita em ordem normal é documentado abaixo:
+$$\mathbf{2} = S\ (S\ (K\ S)\ K)\ (S\ K\ K)$$
 
-### Traço Teórico de Passos Estruturais (Macro)
-1.  **Termo Inicial:** `((((((S S) K) (S K K)) x) y) z)`
-2.  **Passo 1 (Redução de S no topo):** O bloco `(S S K (S K K) x)` avalia a regra $S\ a\ b\ c 	o a\ c\ (b\ c)$, onde $a = S$, $b = K$, e $c = (S K K)$.
-    $$	o (((S\ x)\ (K\ x))\ y)\ z$$
-3.  **Passo 2 (Redução do novo S mais externo):** Avalia-se o redex com $a = S$, $b = x$, $c = (K x)$ e o argumento $y$.
-    $$	o ((x\ y)\ ((K\ x)\ y))\ z$$
-4.  **Passo 3 (Redução de K interno):** Antes de aplicar o $z$ mais externo, a ordem normal avalia a ramificação à esquerda aplicável. O subtermo `((K x) y)` reduz para `x`.
-    $$	o ((x\ y)\ x)\ z$$
-5.  **Forma Normal Atingida:** `x y x z` (Associativo à esquerda: `(((x y) x) z)`).
+A escolha não é arbitrária: $S\ (K\ S)\ K$ é o combinador de composição $B$ (com
+$B\ f\ g\ x \to f\ (g\ x)$) e $S\ K\ K$ é a identidade $I$; logo $\mathbf{2} = S\ B\ I$, o
+numeral de Church que significa "aplicar uma função **duas vezes**". Aplicando-o a duas
+variáveis livres $f$ e $x$, o termo deve reduzir a $f\ (f\ x)$ — exatamente a definição de
+$\mathbf{2}\ f\ x = f\ (f\ x)$. Esse é um exemplo conceitualmente significativo (não um
+incremento artificial) e que exercita as três regras do sistema.
 
-> **Nota de Rastreamento Computacional:** No arquivo de testes e demonstração (`demo.py`), dependendo de como as subárvores e parênteses implícitos de aplicação são expandidos pelo interpretador Python, os passos intermediários de desempacotamento de nós de aplicação na árvore binária computam exatamente as micro-operações de pilha, gerando o relatório linear de passos exibido no console CLI.
+### Traço passo a passo (saída real de `demo.py`, ordem normal)
+
+Termo inicial: `S (S (K S) K) (S K K) f x`
+
+```
+  Passo 01: S (S (K S) K) (S K K) f x   ====> [S x y z -> x z (y z)]
+  Passo 02: S (K S) K f (S K K f) x     ====> [S x y z -> x z (y z)]
+  Passo 03: K S f (K f) (S K K f) x     ====> [K x y -> x]
+  Passo 04: S (K f) (S K K f) x         ====> [S x y z -> x z (y z)]
+  Passo 05: K f x (S K K f x)           ====> [K x y -> x]
+  Passo 06: f (S K K f x)               ====> [S x y z -> x z (y z)]
+  Passo 07: f (K f (K f) x)             ====> [K x y -> x]
+Forma Normal: f (f x)   |   total: 7 passos
+```
+
+> **Reprodutível:** `python demo.py` imprime esse mesmo traço (exemplo 3). A forma normal
+> `f (f x)` confirma que a codificação de $\mathbf{2}$ em S/K computa "aplique $f$ duas vezes",
+> usando as três regras (S três vezes, K duas vezes) ao longo dos 7 passos.
 
 ---
 

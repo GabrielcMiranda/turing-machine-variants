@@ -25,12 +25,12 @@ class App(Term):
         self.left = left
         self.right = right
     def __str__(self):
-        # Simplifica a visualização omitindo parênteses desnecessários à esquerda
+        # Notação canônica com parênteses mínimos: a aplicação é associativa à
+        # esquerda, então a subárvore esquerda nunca precisa de parênteses; a
+        # direita só precisa quando ela própria é uma aplicação.
         l_str = str(self.left)
         r_str = f"({self.right})" if isinstance(self.right, App) else str(self.right)
-        if isinstance(self.left, App):
-            return f"{l_str} {r_str}"
-        return f"({l_str} {r_str})"
+        return f"{l_str} {r_str}"
     def __eq__(self, other):
         return isinstance(other, App) and self.left == other.left and self.right == other.right
 

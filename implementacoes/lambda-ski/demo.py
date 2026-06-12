@@ -26,9 +26,9 @@ if __name__ == "__main__":
     # 2. Booleanos de Church (TRUE = K, FALSE = K I)
     run_and_print_demo("2. Booleano TRUE escolhendo o primeiro operando (K a b)", "K a b")
 
-    # 3. Caso Complexo de Teste: Redução longa (>= 7 passos)
-    # Termo: S S K (S K K) x y z
-    run_and_print_demo("3. Caso de Alta Complexidade (Exige >= 7 passos)", "S S K (S K K) x y z")
+    # 3. Numeral de Church 2 em SKI: 2 = S (S (K S) K) (S K K) = S B I.
+    # Aplicado a f e x, reduz a f (f x) ("aplique f duas vezes") em 7 passos.
+    run_and_print_demo("3. Numeral de Church 2 aplicado a f x (>= 7 passos)", "S (S (K S) K) (S K K) f x")
 
     # 4. Termo que não normaliza (Loop Infinito controlado)
     # Omega = S I I (S I I) -> se auto-replica infinitamente
