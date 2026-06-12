@@ -119,7 +119,110 @@ A máquina repete passes até não sobrar `1`.
 **Conclusão:** existe ramo aceitante $\iff$ existe `a` com $2 \le a$ e `a | n` e `n/a ≥ 2`
 $\iff$ `n` é composto. Portanto $L(M) = L$.
 
-## 6. Relação com computabilidade
+## 6. Depuração: estado da fita passo a passo
+
+Os traços abaixo mostram a **evolução da fita** (configuração a cada passo) para duas entradas
+contrastantes: `1111` (`n = 4`, **composto** → aceita) e `11111` (`n = 5`, **primo** → rejeita).
+Cada linha traz `passo | estado | fita`, com a célula sob a cabeça destacada entre colchetes
+`[ ]`. O símbolo `_` é o branco (`⊔`). Como a única escolha não determinística está em $q_2$
+(continuar marcando vs. fixar `a`), cada valor candidato de `a` corresponde a **um ramo**; abaixo
+exibe-se cada ramo separadamente.
+
+### 6.1 Entrada `1111` (`n = 4`, composto) — **ACEITA**
+
+O ramo que fixa `a = 2` é **aceitante** (`4 = 2·2`, `b = 2`). Fase 1 grava o gabarito `AA`; a
+Fase 2 faz **dois passes**, cada um consumindo 2 uns (marcando-os `B`), e ao final nada sobra:
+
+```
+  0 | q0  | [1] 1  1  1
+  1 | q1  |  A [1] 1  1
+  2 | q2  |  A  A [1] 1      ← (nd) decide PARAR aqui: a = 2 fixado
+  3 | q3  |  A [A] 1  1
+  4 | q3  | [A] A  1  1
+  5 | q3  | [_] A  A  1  1
+  6 | q4  | [A] A  1  1      ← início da verificação (passe 1)
+  7 | q5  |  C [A] 1  1
+  8 | q5  |  C  A [1] 1
+  9 | q6  |  C [A] B  1      ← 1º '1' consumido → B
+ 10 | q6  | [C] A  B  1
+ 11 | q7  |  D [A] B  1
+ 12 | q5  |  D  C [B] 1
+ 13 | q5  |  D  C  B [1]
+ 14 | q6  |  D  C [B] B      ← 2º '1' consumido → B
+ 15 | q6  |  D [C] B  B
+ 16 | q7  |  D  D [B] B
+ 17 | q8  |  D [D] B  B
+ 18 | q8  | [D] D  B  B
+ 19 | q8  | [_] D  D  B  B
+ 20 | q9  | [D] D  B  B      ← restaura gabarito D→A
+ 21 | q9  |  A [D] B  B
+ 22 | q9  |  A  A [B] B
+ 23 | q9  |  A  A  B [B]
+ 24 | q9  |  A  A  B  B [_]  ← não sobrou '1'
+ 25 | qa  |  A  A  B  B [_]  ← ACEITA
+```
+
+> Note que os 4 uns viraram `B` (consumidos) sem nenhum sobrar: `n - a = 2 = 1·a`, logo
+> `n = 2·a = 4`. Existe ramo aceitante ⇒ `1111 ∈ L(M)`.
+
+Os demais ramos de `n = 4` **não** aceitam (mas basta um aceitante):
+
+| ramo | gabarito | onde para | motivo |
+|------|----------|-----------|--------|
+| `a = 3` | `AAA1` | $q_5$ lê `⊔` no 1º passe | `3 ∤ 4` (falta `1` para fechar o bloco) |
+| `a = 4` | `AAAA` então $q_2$ lê `⊔` | $\delta(q_2,⊔)=\varnothing$ | `b = 1` (gabarito consumiu tudo) |
+
+### 6.2 Entrada `11111` (`n = 5`, primo) — **REJEITA**
+
+Nenhum ramo atinge $q_a$. Abaixo o ramo `a = 2`, que chega a fazer **um passe completo** (consome
+2 uns) e fracassa no **segundo** passe — falta um `1` para fechar o bloco (`5` não é múltiplo de `2`):
+
+```
+  0 | q0  | [1] 1  1  1  1
+  1 | q1  |  A [1] 1  1  1
+  2 | q2  |  A  A [1] 1  1      ← (nd) PARAR: a = 2
+  3 | q3  |  A [A] 1  1  1
+  4 | q3  | [A] A  1  1  1
+  5 | q3  | [_] A  A  1  1  1
+  6 | q4  | [A] A  1  1  1      ← passe 1
+ ...   (consome 2 uns, restaura gabarito) ...
+ 24 | q9  |  A  A  B  B [1]     ← sobrou 1 '1' → novo passe
+ 25 | q10 |  A  A  B [B] 1
+ ...   (rebobina) ...
+ 30 | q4  | [A] A  B  B  1      ← passe 2
+ 31 | q5  |  C [A] B  B  1
+ 34 | q5  |  C  A  B  B [1]     ← consome o último '1'
+ 35 | q6  |  C  A  B [B] B
+ ...
+ 40 | q5  |  D  C [B] B  B
+ 41 | q5  |  D  C  B [B] B
+ 42 | q5  |  D  C  B  B [B]
+ 43 | q5  |  D  C  B  B  B [_]  ← $q_5$ lê '⊔': faltou o 2º '1' do bloco → PARA (rejeita ramo)
+```
+
+O ramo `a = 5` é o mais curto: marca tudo como `A` e morre logo na Fase 1, pois `b = 1`:
+
+```
+  0 | q0  | [1] 1  1  1  1
+  1 | q1  |  A [1] 1  1  1
+  2 | q2  |  A  A [1] 1  1
+  3 | q2  |  A  A  A [1] 1
+  4 | q2  |  A  A  A  A [1]
+  5 | q2  |  A  A  A  A  A [_]  ← $\delta(q_2,⊔)=\varnothing$ → PARA (rejeita ramo)
+```
+
+Resumo de **todos** os ramos de `n = 5` (todos param sem aceitar):
+
+| ramo | onde para | fita no momento da parada | motivo |
+|------|-----------|---------------------------|--------|
+| `a = 2` | $q_5$ lê `⊔` (passe 2) | `DCBBB[_]` | `2 ∤ 5` |
+| `a = 3` | $q_5$ lê `⊔` (passe 1) | `DDCBB[_]` | `3 ∤ 5` |
+| `a = 4` | $q_5$ lê `⊔` (passe 1) | `DCAAB[_]` | `4 ∤ 5` |
+| `a = 5` | $q_2$ lê `⊔` | `AAAAA[_]` | `b = 1` |
+
+Como **não existe** ramo aceitante, `11111 ∉ L(M)` — coerente com `5` ser primo.
+
+## 7. Relação com computabilidade
 
 - **Não determinismo como "adivinhação":** o modelo expressa diretamente "existe um fator `a`?".
   É a motivação clássica do não determinismo — o ramo certo é *adivinhado* e a verificação é
@@ -133,7 +236,7 @@ $\iff$ `n` é composto. Portanto $L(M) = L$.
   (cada `a` candidato é um ramo), o que torna a simulação determinística da árvore custosa —
   ilustra a diferença entre *reconhecibilidade* e *custo* de computação.
 
-## 7. Resumo dos componentes formais
+## 8. Resumo dos componentes formais
 
 | Componente | Valor |
 |------------|-------|
