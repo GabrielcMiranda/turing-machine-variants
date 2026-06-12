@@ -63,8 +63,12 @@ turing-machine-variants/
 │       ├── rastreamento.md         # tabela de testes + traços passo a passo
 │       └── rastreamento.py         # reproduz a tabela e os traços
 └── slides/
+    ├── apresentacao.md             # DECK FINAL integrado (Marp) — o que se apresenta
+    ├── lambda-ski.md               # slides do SKI (Marp)
     ├── mtnd-compostos.md           # slides da MTND (Marp)
-    └── roteiro-mtnd.md             # roteiro de fala da MTND
+    ├── roteiro-ski.md              # roteiro de fala do SKI
+    ├── roteiro-mtnd.md             # roteiro de fala da MTND
+    └── roteiro-transversal.md      # roteiro de teoria transversal + perguntas cruzadas
 ```
 
 ---
