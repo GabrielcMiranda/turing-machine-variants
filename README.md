@@ -56,6 +56,9 @@ turing-machine-variants/
 │       ├── tabela-transicoes.md    # tabela de transição comentada
 │       └── _verifica.py            # oráculo Python (simula a MTND por BFS)
 ├── testes/
+│   ├── lambda-ski/                 # rastreamento do SKI
+│   │   ├── rastreamento.md         # tabela de casos + traços + conversões λ→SKI
+│   │   └── rastreamento.py         # reproduz tudo a partir da implementação real
 │   └── mtnd-compostos/
 │       ├── rastreamento.md         # tabela de testes + traços passo a passo
 │       └── rastreamento.py         # reproduz a tabela e os traços
@@ -185,8 +188,10 @@ python implementacoes/mtnd-compostos/_verifica.py   # valida 18 casos (aceitos/r
 
 ## 6. Testes e rastreamento de execução
 
-- **SKI:** `test_ski.py` (regras `S`/`K`/`I`, `SKK ⇒ I`, bracket abstraction, termo não
-  normalizante) + traços em `demo.py` e em `documentacao_ski.md`.
+- **SKI:** [`testes/lambda-ski/rastreamento.md`](testes/lambda-ski/rastreamento.md) — tabela de
+  casos (normal/fronteira/limitação), traço de ≥ 7 passos (numeral de Church 2), traço de termo
+  não normalizante (Ω) e conversões λ→SKI verificadas; reprodutível por
+  `testes/lambda-ski/rastreamento.py`. Complementado por `test_ski.py` e `demo.py`.
 - **MTND:** [`testes/mtnd-compostos/rastreamento.md`](testes/mtnd-compostos/rastreamento.md)
   — tabela entrada/esperado/obtido, árvore de ramos do `1⁶` e traço passo a passo de 41 passos
   de um ramo aceitante; reprodutível por `rastreamento.py` e validado por `_verifica.py`.
