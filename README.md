@@ -10,9 +10,9 @@
 
 | Nome | Papel principal |
 |------|-----------------|
-| `<preencher: nome integrante 1>` | Máquina de Turing Não Determinística (JFLAP) |
-| `<preencher: nome integrante 2>` | Combinadores SKI (Python) |
-| `<preencher: nome integrante 3>` | Integração, documentação e defesa |
+| Carlos Eduardo Cardoso Silva | Máquina de Turing Não Determinística (JFLAP) |
+| Gabriel Costa de Miranda | Combinadores SKI (Python) |
+| João Ricardo Silva de Almeida | Integração, documentação e defesa |
 
 > A arguição é **individual**: todos os integrantes sabem explicar as **duas** implementações.
 
